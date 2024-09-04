@@ -1,37 +1,36 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
+//es lo que envuelve toda nuestra app. Aca ponemos lo que queremos que se muestre siempre, ejemplo un footer
+// para autenticacion uso AuthContext. 
+
+import { View, Text, StyleSheet} from 'react-native';
+import LoginScreen from './login';
 import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { useContext } from 'react';
+import HomeScreen from './home';
+import TransfersScreen from './transfers';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+export default function App(){
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
+  // const { isAuthenticated } = useContext(AuthContext); // Obtener el estado de autenticación
+  
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+      <View style={styles.container}>
+        {/* <LoginScreen/> */}
+        {/* <HomeScreen/> */}
+        <TransfersScreen/>
+      </View>
+    //   <Stack initialRouteName={isAuthenticated ? "home" : "login"}>
+    //   <Stack.Screen name="home" options={{ title: 'Home' }} />
+    // <Stack.Screen name="transfers" options={{ title: 'Transfers' }} />
+    // </Stack>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 16,
+  },
+});
+
+
