@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { Link, useRouter } from "expo-router";
 
 export default function TransfersScreen() {
   const [amount, setAmount] = useState("");
@@ -9,6 +10,7 @@ export default function TransfersScreen() {
   const [scheduledRecipient, setScheduledRecipient] = useState("");
   const [transferDate, setTransferDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const router = useRouter();
 
   const handleImmediateTransfer = () => {
     if (amount && recipient) {
@@ -16,9 +18,11 @@ export default function TransfersScreen() {
         "Transfer Successful",
         `Amount: $${amount}\nRecipient: ${recipient}}`
       );
+      router.push("./components/successTransfer");
       // Lógica para realizar la transferencia aquí
     } else {
       Alert.alert("Error", "Please fill out all fields");
+      router.push("./components/errorTransfer");
     }
   };
 
@@ -109,6 +113,14 @@ export default function TransfersScreen() {
         Fecha seleccionada: {transferDate.toLocaleDateString()}
       </Text>
       <Button title="Agendar Transferencia" onPress={handleScheduledTransfer} />
+
+      {/* Botón para ver el historial de transferencias */}
+      <View style={styles.historyButtonContainer}>
+        <Button
+          title="Ver Historial de Transferencias"
+          onPress={() => router.push("./components/transfersList")}
+        />
+      </View>
     </View>
   );
 }
@@ -152,5 +164,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 16,
     textAlign: "center",
+  },
+  historyButtonContainer: {
+    marginTop: 20,
   },
 });

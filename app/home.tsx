@@ -1,12 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { useRouter } from 'expo-router';
+import React from "react";
+import { View, Text, StyleSheet, Button, Pressable } from "react-native";
+import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 // Este es un componente ficticio para mostrar el saldo. Puedes reemplazarlo con datos reales.
 const Balance = ({ amount }: { amount: number }) => {
   return (
     <View style={styles.balanceContainer}>
-      <Text style={styles.balanceText}>Current Balance: ${amount.toFixed(2)}</Text>
+      <Text style={styles.balanceText}>
+        Current Balance: ${amount.toFixed(2)}
+      </Text>
     </View>
   );
 };
@@ -18,9 +21,18 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
+      <Text style={styles.title}>Welcome</Text>
       <Balance amount={userBalance} />
-      {/* <Button title="Transferencias" onPress={() => router.push('/')} /> */}
+      <View>
+        <Button
+          title="Transferir"
+          onPress={() => router.push("./transfers/transfers")}
+        />
+      </View>
+      <Pressable style={styles.button} onPress={() => router.back()}>
+        <Ionicons name="arrow-back" size={15} color="white" />
+        <Text style={styles.buttonText}>Cerrar Sesión</Text>
+      </Pressable>
     </View>
   );
 };
@@ -28,23 +40,36 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: 16,
   },
   title: {
     fontSize: 24,
     marginBottom: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
   balanceContainer: {
     padding: 16,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: "#f8f9fa",
     borderRadius: 8,
     marginTop: 20,
   },
   balanceText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+  },
+  button: {
+    backgroundColor: "#0666cc",
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 8,
+    marginTop: 10,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
 
