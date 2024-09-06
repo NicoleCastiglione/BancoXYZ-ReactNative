@@ -1,6 +1,6 @@
 import { api } from "@/api/api";
 import { User } from "@/entities/user";
-import { AuthResponse } from "@/infrastructure/auth.responses";
+import { AuthResponse } from "@/interfaces/auth.responses";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 

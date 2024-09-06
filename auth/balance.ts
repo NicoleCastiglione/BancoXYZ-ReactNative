@@ -1,5 +1,5 @@
 import { apiBalance } from '@/api/apiBalance';
-import { Balance } from '@/infrastructure/balance.responses';
+import { Balance } from '@/services/balance.responses';
 
 export const getBalance = async(): Promise<Balance> => {
   try {

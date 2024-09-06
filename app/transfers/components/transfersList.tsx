@@ -1,6 +1,5 @@
-import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRouter } from "expo-router";
+import { getTransfers } from "@/auth/transferList";
+import { TransferListResponse } from "@/services/transferList.responses";
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -8,40 +7,55 @@ import {
   FlatList,
   Text,
   StyleSheet,
-  Pressable,
   ActivityIndicator,
 } from "react-native";
 
-interface Transfer {
-  id: string;
-  recipient: string;
-  amount: string;
-  date: string;
-}
-
-const transferData: Transfer[] = [
-  { id: "1", recipient: "Juan Perez", amount: "5000", date: "2024-08-01" },
-  { id: "2", recipient: "Maria Lopez", amount: "2000", date: "2024-08-15" },
-  { id: "3", recipient: "Carlos Martinez", amount: "3000", date: "2024-09-01" },
-  { id: "4", recipient: "Juan Lopez", amount: "3000", date: "2024-10-01" },
-  { id: "5", recipient: "Juan Benitez", amount: "1500", date: "2024-10-01" },
-  // Agrega más transferencias según sea necesario
-];
-
 export default function TransferList() {
-  const [filteredData, setFilteredData] = useState(transferData);
-  const [searchFilter, setSearchFilter] = useState("");
+  const [transfers, setTransfers] = useState<TransferListResponse[]>([]);
+  const [filteredData, setFilteredData] = useState<TransferListResponse[]>([]);
+  const [searchFilter, setSearchFilter] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const filtered = transferData.filter(
+    const fetchTransfers = async () => {
+      try {
+        const response = await getTransfers();
+        setTransfers(response.transfers);
+        setFilteredData(response.transfers);
+      } catch (error) {
+        setError("Error al obtener la lista de transferencias.");
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTransfers();
+  }, []);
+
+  useEffect(() => {
+    const filtered = transfers.filter(
       (item) =>
-        item.recipient.toLowerCase().includes(searchFilter.toLowerCase()) ||
-        item.amount.includes(searchFilter) ||
+        item.payeer.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        item.value.toString().includes(searchFilter) ||
         item.date.includes(searchFilter)
     );
 
     setFilteredData(filtered);
-  }, [searchFilter]);
+  }, [searchFilter, transfers]);
+
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="blue" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return <Text style={{ color: "red" }}>{error}</Text>;
+  }
 
   return (
     <View style={styles.container}>
@@ -51,14 +65,13 @@ export default function TransferList() {
         value={searchFilter}
         onChangeText={setSearchFilter}
       />
-
       <FlatList
         data={filteredData}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.item}>
-            <Text>{item.recipient}</Text>
-            <Text>{item.amount}</Text>
+            <Text>{item.payeer.name}</Text>
+            <Text>{item.value.toFixed(2)}</Text>
             <Text>{item.date}</Text>
           </View>
         )}
@@ -96,15 +109,5 @@ const styles = StyleSheet.create({
     top: 15,
     left: 15,
     zIndex: 1,
-  },
-  loader: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  error: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });

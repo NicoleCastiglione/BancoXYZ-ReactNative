@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { Balance } from "@/infrastructure/balance.responses";
+import { Balance } from "@/services/balance.responses";
 import { getBalance } from "@/auth/balance";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

@@ -1,0 +1,20 @@
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const API_URL = "https://n0qaa2fx3c.execute-api.us-east-1.amazonaws.com/default/";
+
+export const apiTransferList = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+apiTransferList.interceptors.request.use( async (config: any) => {
+    const token = await AsyncStorage.getItem('token'); 
+ 
+    if(token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
+  return config;
+});
