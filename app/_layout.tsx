@@ -4,29 +4,34 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { AuthProvider } from "@/authContext";
 
-export default function App() {
+export default function Layout() {
   return (
     <AuthProvider>
       <SafeAreaView style={styles.container}>
         <StatusBar />
         <Stack>
-          <Stack.Screen name="login" options={{ title: "Login" }} />
-          <Stack.Screen name="home" options={{ title: "Home" }} />
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="home" options={{ headerShown: false }} />
           <Stack.Screen
             name="transfers/transfers"
-            options={{ title: "Transfers" }}
-          />
-          <Stack.Screen
-            name="transfers/components/successTransfer"
-            options={{ headerTitle: "Success" }}
-          />
-          <Stack.Screen
-            name="transfers/components/errorTransfer"
-            options={{ headerTitle: "Error" }}
+            options={{
+              title: "Transferencia Bancaria",
+              headerTitleAlign: "center",
+            }}
           />
           <Stack.Screen
             name="transfers/components/transfersList"
-            options={{ headerTitle: "TransfersList" }}
+            options={{
+              title: "Historial de Transferencias",
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name="transfers/components/scheduledTransfer"
+            options={{
+              title: "Programar Transferencia",
+              headerTitleAlign: "center",
+            }}
           />
         </Stack>
       </SafeAreaView>
@@ -37,6 +42,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
   },
 });

@@ -18,7 +18,7 @@ const BALANCE_ENDPOINT =
 const Balance = ({ amount }: { amount: number }) => {
   return (
     <View style={styles.balanceCard}>
-      <Text style={styles.balanceLabel}>Current Balance</Text>
+      <Text style={styles.balanceLabel}>Saldo Actual</Text>
       <Text style={styles.balanceAmount}>${amount.toFixed(2)}</Text>
     </View>
   );
@@ -76,7 +76,7 @@ const HomeScreen = () => {
         text: "Sí",
         onPress: async () => {
           await AsyncStorage.removeItem("token");
-          router.push("/login");
+          router.push("/");
         },
       },
       {
@@ -97,13 +97,20 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.topSection}>
-        <Text style={styles.title}>Welcome!</Text>
+        <Text style={styles.title}>Bienvenido a Banco YXZ</Text>
         {userBalance !== null ? <Balance amount={userBalance} /> : null}
         <Pressable
           style={styles.actionButton}
           onPress={() => router.push("./transfers/transfers")}
         >
           <Text style={styles.actionButtonText}>Transferir</Text>
+        </Pressable>
+      </View>
+      <View style={styles.actionButton}>
+        <Pressable
+          onPress={() => router.push("./transfers/components/transfersList")}
+        >
+          <Text style={styles.actionButtonText}>Ver Historial</Text>
         </Pressable>
       </View>
 
@@ -118,8 +125,9 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 16,
     backgroundColor: "#f0f4f8",
+    marginTop: 25,
   },
   topSection: {
     marginBottom: 20,

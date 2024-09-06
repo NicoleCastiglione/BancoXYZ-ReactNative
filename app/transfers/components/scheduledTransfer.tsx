@@ -12,74 +12,32 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { useRouter } from "expo-router";
 
 export default function TransfersScreen() {
-  const [amount, setAmount] = useState("");
-  const [recipient, setRecipient] = useState("");
   const [scheduledAmount, setScheduledAmount] = useState("");
   const [scheduledRecipient, setScheduledRecipient] = useState("");
   const [transferDate, setTransferDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const router = useRouter();
 
-  const handleImmediateTransfer = () => {
-    if (amount && recipient) {
+  const handleScheduledTransfer = () => {
+    if (scheduledAmount && scheduledRecipient) {
       Alert.alert(
-        "Transfer Successful",
-        `Amount: $${amount}\nRecipient: ${recipient}}`
+        "Transfer Scheduled",
+        `Amount: $${scheduledAmount}\nRecipient: ${scheduledRecipient}\nScheduled Date: ${transferDate.toLocaleDateString()}`
       );
-      router.push("./components/successTransfer");
-      // Lógica para realizar la transferencia aquí
+      // Lógica para agendar la transferencia aquí
     } else {
       Alert.alert("Error", "Please fill out all fields");
-      router.push("./components/errorTransfer");
     }
   };
 
-  // const handleScheduledTransfer = () => {
-  //   if (scheduledAmount && scheduledRecipient) {
-  //     Alert.alert(
-  //       "Transfer Scheduled",
-  //       `Amount: $${scheduledAmount}\nRecipient: ${scheduledRecipient}\nScheduled Date: ${transferDate.toLocaleDateString()}`
-  //     );
-  //     // Lógica para agendar la transferencia aquí
-  //   } else {
-  //     Alert.alert("Error", "Please fill out all fields");
-  //   }
-  // };
-
-  // const onDateChange = (event: any, selectedDate?: Date) => {
-  //   const currentDate = selectedDate || transferDate;
-  //   setShowDatePicker(false);
-  //   setTransferDate(currentDate);
-  // };
+  const onDateChange = (event: any, selectedDate?: Date) => {
+    const currentDate = selectedDate || transferDate;
+    setShowDatePicker(false);
+    setTransferDate(currentDate);
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.amountContainer}>
-        <Text style={styles.currencySymbol}>$</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="0,00"
-          placeholderTextColor="#999"
-          keyboardType="numeric"
-          value={amount}
-          onChangeText={setAmount}
-        />
-      </View>
-      <View style={styles.amountContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Destinatario"
-          placeholderTextColor="#999"
-          value={recipient}
-          onChangeText={setRecipient}
-        />
-      </View>
-      <Pressable style={styles.button} onPress={handleImmediateTransfer}>
-        <Text style={styles.buttonText}>Realizar Transferencia</Text>
-      </Pressable>
-
-      {/* Sección de Programar Transferencia */}
-      {/* <Text style={styles.sectionTitle}>Programar Transferencia</Text>
       <View style={styles.amountContainer}>
         <Text style={styles.currencySymbol}>$</Text>
         <TextInput
@@ -113,12 +71,9 @@ export default function TransfersScreen() {
       )}
       <Text style={styles.selectedDate}>
         Fecha seleccionada: {transferDate.toLocaleDateString()}
-      </Text> */}
-      <Pressable
-        style={styles.button}
-        onPress={() => router.push("./components/scheduledTransfer")}
-      >
-        <Text style={styles.buttonText}>Programar Transferencia</Text>
+      </Text>
+      <Pressable style={styles.button} onPress={handleScheduledTransfer}>
+        <Text style={styles.buttonText}>Agendar Transferencia</Text>
       </Pressable>
     </View>
   );
@@ -142,7 +97,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
-    marginBottom: 40,
+    marginBottom: 20,
     paddingHorizontal: 8,
   },
   currencySymbol: {
@@ -159,7 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0666cc",
     paddingVertical: 14,
     borderRadius: 12,
-    marginBottom: 40,
+    marginBottom: 20,
   },
   buttonText: {
     color: "#fff",
@@ -168,9 +123,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   linkText: {
-    color: "#0666cc", // Color azul para el texto
-    fontSize: 18, // Tamaño del texto
-    fontWeight: "bold", // Opción para resaltar el texto
+    color: "#0666cc",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   selectedDate: {
     marginTop: 10,

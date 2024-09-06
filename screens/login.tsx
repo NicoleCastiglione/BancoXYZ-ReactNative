@@ -49,15 +49,14 @@ export const LoginScreen: React.FC = () => {
         <ActivityIndicator color={"blue"} size={"large"} />
       ) : (
         <>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail}
+          />
           <View style={styles.passwordContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              keyboardType="email-address"
-              value={email}
-              onChangeText={setEmail}
-            />
-
             <TextInput
               style={styles.input}
               placeholder="Password"

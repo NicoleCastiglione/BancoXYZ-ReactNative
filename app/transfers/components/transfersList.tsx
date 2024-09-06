@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
@@ -8,6 +9,7 @@ import {
   Text,
   StyleSheet,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 
 interface Transfer {
@@ -23,64 +25,31 @@ const transferData: Transfer[] = [
   { id: "3", recipient: "Carlos Martinez", amount: "3000", date: "2024-09-01" },
   { id: "4", recipient: "Juan Lopez", amount: "3000", date: "2024-10-01" },
   { id: "5", recipient: "Juan Benitez", amount: "1500", date: "2024-10-01" },
-  // Agrega más transferencias según sea necesar
+  // Agrega más transferencias según sea necesario
 ];
 
 export default function TransferList() {
   const [filteredData, setFilteredData] = useState(transferData);
-  const [recipientFilter, setRecipientFilter] = useState("");
-  const [amountFilter, setAmountFilter] = useState("");
-  const [dateFilter, setDateFilter] = useState("");
-  const router = useRouter();
+  const [searchFilter, setSearchFilter] = useState("");
 
   useEffect(() => {
-    let filtered = transferData;
-
-    if (recipientFilter) {
-      filtered = filtered.filter((item) =>
-        item.recipient.toLowerCase().includes(recipientFilter.toLowerCase())
-      );
-    }
-
-    if (amountFilter) {
-      filtered = filtered.filter((item) => item.amount.includes(amountFilter));
-    }
-
-    if (dateFilter) {
-      filtered = filtered.filter((item) => item.date.includes(dateFilter));
-    }
+    const filtered = transferData.filter(
+      (item) =>
+        item.recipient.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        item.amount.includes(searchFilter) ||
+        item.date.includes(searchFilter)
+    );
 
     setFilteredData(filtered);
-  }, [recipientFilter, amountFilter, dateFilter]);
+  }, [searchFilter]);
 
   return (
     <View style={styles.container}>
-      {/* <Pressable style={styles.backButton} onPress={() => router.back()}>
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </Pressable> */}
-      <View>
-        <Text style={styles.title}>Historial de Transferencias</Text>
-      </View>
       <TextInput
         style={styles.search}
-        placeholder="Filtrar por destinatario"
-        value={recipientFilter}
-        onChangeText={setRecipientFilter}
-      />
-
-      <TextInput
-        style={styles.search}
-        placeholder="Filtrar por monto"
-        keyboardType="numeric"
-        value={amountFilter}
-        onChangeText={setAmountFilter}
-      />
-
-      <TextInput
-        style={styles.search}
-        placeholder="Filtrar por fecha (YYYY-MM-DD)"
-        value={dateFilter}
-        onChangeText={setDateFilter}
+        placeholder="Buscar por destinatario, monto o fecha"
+        value={searchFilter}
+        onChangeText={setSearchFilter}
       />
 
       <FlatList
@@ -127,5 +96,15 @@ const styles = StyleSheet.create({
     top: 15,
     left: 15,
     zIndex: 1,
+  },
+  loader: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  error: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
