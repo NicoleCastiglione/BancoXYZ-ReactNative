@@ -9,65 +9,35 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-
+import { Balance } from "@/infrastructure/balance.responses";
+import { getBalance } from "@/auth/balance";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const BALANCE_ENDPOINT =
-  "https://2k0ic4z7s5.execute-api.us-east-1.amazonaws.com/default/balance";
-
-const Balance = ({ amount }: { amount: number }) => {
-  return (
-    <View style={styles.balanceCard}>
-      <Text style={styles.balanceLabel}>Saldo Actual</Text>
-      <Text style={styles.balanceAmount}>${amount.toFixed(2)}</Text>
-    </View>
-  );
-};
+const BalanceComponent = ({ amount }: { amount: number }) => (
+  <View style={styles.balanceCard}>
+    <Text style={styles.balanceLabel}>Saldo Actual</Text>
+    <Text style={styles.balanceAmount}>USD{amount}</Text>
+  </View>
+);
 
 const HomeScreen = () => {
   const router = useRouter();
-  const [userBalance, setUserBalance] = useState<number | null>(null);
+  const [userBalance, setUserBalance] = useState<Balance | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [name, setName] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = await AsyncStorage.getItem("token");
-        const response = await fetch(BALANCE_ENDPOINT, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (response.ok) {
-          const json = await response.json();
-          setUserBalance(json.accountBalance);
-        } else {
-          setError("No autorizado o error en la solicitud.");
-        }
+        const balanceData = await getBalance();
+        setUserBalance(balanceData);
       } catch (error) {
-        setError("Error al obtener el saldo.");
-        console.error(error);
+        setError("No autorizado o error en la solicitud.");
       } finally {
         setLoading(false);
       }
     };
-
-    const getName = async () => {
-      try {
-        const nameObtained = await AsyncStorage.getItem("userName");
-        if (nameObtained) {
-          setName(nameObtained);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     fetchData();
-    getName();
   }, []);
 
   const handleLogout = async () => {
@@ -87,7 +57,11 @@ const HomeScreen = () => {
   };
 
   if (loading) {
-    return <ActivityIndicator size="large" color="blue" />;
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="blue" />
+      </View>
+    );
   }
 
   if (error) {
@@ -98,7 +72,9 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.topSection}>
         <Text style={styles.title}>Bienvenido a Banco YXZ</Text>
-        {userBalance !== null ? <Balance amount={userBalance} /> : null}
+        {userBalance ? (
+          <BalanceComponent amount={userBalance.accountBalance} />
+        ) : null}
         <Pressable
           style={styles.actionButton}
           onPress={() => router.push("./transfers/transfers")}

@@ -1,17 +1,16 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = 'https://ofqx4zxgcf.execute-api.us-east-1.amazonaws.com/default/';
+const API_URL = "https://2k0ic4z7s5.execute-api.us-east-1.amazonaws.com/default/";
 
-export const apiTransfer = axios.create({
+export const apiBalance = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Intercepta y añade el token JWT si está disponible
-apiTransfer.interceptors.request.use( async (config: any) => {
+apiBalance.interceptors.request.use( async (config: any) => {
     const token = await AsyncStorage.getItem('token'); 
  
     if(token) {

@@ -14,7 +14,7 @@ export default function TransfersScreen() {
   const [document, setDocument] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState(new Date());
-  const [isLoading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleTransfer = async () => {
