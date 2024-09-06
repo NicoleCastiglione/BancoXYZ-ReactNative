@@ -82,7 +82,7 @@ const HomeScreen = () => {
           <Text style={styles.actionButtonText}>Transferir</Text>
         </Pressable>
       </View>
-      <View style={styles.actionButton}>
+      <View style={styles.actionButton2}>
         <Pressable
           onPress={() => router.push("./transfers/components/transfersList")}
         >
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   balanceCard: {
-    backgroundColor: "#4B6EF5",
+    backgroundColor: "#5395db",
     padding: 20,
     borderRadius: 12,
     alignItems: "center",
@@ -139,13 +139,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#0666cc",
     paddingVertical: 14,
     borderRadius: 12,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   actionButtonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 10,
+  },
+  actionButton2: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#5395db",
+    paddingVertical: 14,
+    borderRadius: 12,
+    marginBottom: 20,
   },
   logoutButton: {
     flexDirection: "row",

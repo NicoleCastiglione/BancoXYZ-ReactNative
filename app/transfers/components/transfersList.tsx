@@ -47,7 +47,7 @@ export default function TransferList() {
 
   if (loading) {
     return (
-      <View style={styles.container}>
+      <View>
         <ActivityIndicator size="large" color="blue" />
       </View>
     );
@@ -70,9 +70,11 @@ export default function TransferList() {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.item}>
-            <Text>{item.payeer.name}</Text>
-            <Text>{item.value.toFixed(2)}</Text>
-            <Text>{item.date}</Text>
+            <View>
+              <Text style={styles.nameText}>{item.payeer.name}</Text>
+              <Text style={styles.valueText}>USD {item.value.toFixed(2)}</Text>
+            </View>
+            <Text style={styles.dateText}>{item.date}</Text>
           </View>
         )}
       />
@@ -83,14 +85,9 @@ export default function TransferList() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     padding: 16,
     marginTop: 25,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 16,
-    textAlign: "center",
+    backgroundColor: "#f0f4f8",
   },
   search: {
     height: 40,
@@ -98,16 +95,27 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     paddingHorizontal: 10,
+    fontSize: 16,
+  },
+  nameText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  valueText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#0666cc",
+  },
+  dateText: {
+    fontSize: 16,
+    textAlign: "right",
+    flex: 1,
   },
   item: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     padding: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
-  },
-  backButton: {
-    position: "absolute",
-    top: 15,
-    left: 15,
-    zIndex: 1,
   },
 });

@@ -77,7 +77,7 @@ export default function TransfersScreen() {
         <Text style={styles.buttonText}>Realizar Transferencia</Text>
       </Pressable>
       <Pressable
-        style={styles.button}
+        style={styles.button2}
         onPress={() => router.push("./components/scheduledTransfer")}
       >
         <Text style={styles.buttonText}>Programar Transferencia</Text>
@@ -119,6 +119,12 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#0666cc",
+    paddingVertical: 14,
+    borderRadius: 12,
+    marginBottom: 40,
+  },
+  button2: {
+    backgroundColor: "#5395db",
     paddingVertical: 14,
     borderRadius: 12,
     marginBottom: 40,
