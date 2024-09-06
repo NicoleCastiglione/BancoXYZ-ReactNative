@@ -8,7 +8,7 @@ import {
   Pressable,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { postTransfer } from "@/auth/transfer";
+import { postTransfer } from "../../services/transfer";
 
 export default function TransfersScreen() {
   const [document, setDocument] = useState("");
@@ -19,7 +19,7 @@ export default function TransfersScreen() {
 
   const handleTransfer = async () => {
     if (!document || !amount) {
-      Alert.alert("Error", "Please fill out all fields");
+      Alert.alert("Error", "Por favor complete todos los campos");
       return;
     }
 

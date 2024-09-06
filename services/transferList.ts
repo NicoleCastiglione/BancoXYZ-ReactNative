@@ -1,5 +1,5 @@
 import { apiTransferList } from '@/api/apiTransferList';
-import { TransferListResponse } from '../services/transferList.responses'
+import { TransferListResponse } from '../interfaces/transferList.responses'
 
 export const getTransfers = async (): Promise<TransferListResponse> => {
   try {

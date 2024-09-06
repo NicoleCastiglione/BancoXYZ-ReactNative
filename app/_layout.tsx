@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { Stack } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { AuthProvider } from "@/authContext";
+import { AuthProvider } from "@/context/authContext";
 
 export default function Layout() {
   return (

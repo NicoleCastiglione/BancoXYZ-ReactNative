@@ -1,5 +1,5 @@
-import { getTransfers } from "@/auth/transferList";
-import { TransferListResponse } from "@/services/transferList.responses";
+import { getTransfers } from "@/services/transferList";
+import { TransferListResponse } from "@/interfaces/transferList.responses";
 import React, { useEffect, useState } from "react";
 import {
   View,

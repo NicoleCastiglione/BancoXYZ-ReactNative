@@ -25,7 +25,7 @@ export default function ScheduledTransferScreen() {
         `Monto: $${scheduledAmount}\nDestinatario: ${scheduledRecipient}\nDía: ${transferDate.toLocaleDateString()}`
       );
     } else {
-      Alert.alert("Error", "Please fill out all fields");
+      Alert.alert("Error", "Por favor complete todos los campos");
     }
   };
 

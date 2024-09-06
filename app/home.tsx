@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { Balance } from "@/services/balance.responses";
-import { getBalance } from "@/auth/balance";
+import { Balance } from "../interfaces/balance.responses";
+import { getBalance } from "@/services/balance";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const BalanceComponent = ({ amount }: { amount: number }) => (
@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#f0f4f8",
-    marginTop: 25,
   },
   topSection: {
     marginBottom: 20,

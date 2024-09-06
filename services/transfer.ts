@@ -1,5 +1,5 @@
 import { apiTransfer } from "../api/apiTransfer";
-import { TransferData } from "@/services/transfers.responses";
+import { TransferData } from "@/interfaces/transfers.responses";
     
 export const postTransfer = async (transferData: TransferData) => {
   try {

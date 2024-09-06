@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { authLogin } from "@/auth/auth";
-import { useAuth } from "@/authContext";
+import { useAuth } from "@/context/authContext";
 
 export const LoginScreen: React.FC = () => {
   const { login } = useAuth();
