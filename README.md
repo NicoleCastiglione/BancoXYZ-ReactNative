@@ -1,50 +1,53 @@
-# Welcome to your Expo app 👋
+# Banco XYZ 
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicación móvil desarrollada en Expo de React Native. 
 
-## Get started
+## Instalación
 
-1. Install dependencies
+Requisitos previos:
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+  
+1. Clona el repositorio en tu máquina local:
+
+   ```bash
+   git clone https://github.com/NicoleCastiglione/BancoXYZ-ReactNative.git
+   ```
+
+2. Navega al directorio del proyecto:
+
+   ```bash
+   cd BancoXYZ-ReactNative
+   ```
+
+3. Instala las dependencias del proyecto:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+## Iniciar el proyecto con Expo
+Una vez que las dependencias estén instaladas, puede ejecutar el siguiente comando para iniciar el proyecto:
 
    ```bash
-    npx expo start
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Evidencia
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Login
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+![Screenshot_1725615720](https://github.com/user-attachments/assets/ae9f8c86-cb7e-4662-ae10-602a3faf458d)
+![Screenshot_1725617502](https://github.com/user-attachments/assets/972bf445-1aae-4abb-bdc3-f906e0150e0a)
 
-## Get a fresh project
+## Home
 
-When you're ready, run:
+![Screenshot_1725617438](https://github.com/user-attachments/assets/83717a56-3143-4a52-ba54-039e3728dc8c)
 
-```bash
-npm run reset-project
-```
+## Transferencias 
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+![Screenshot_1725617443](https://github.com/user-attachments/assets/cc180028-9725-4219-9641-079700753aab)
+![Screenshot_1725617470](https://github.com/user-attachments/assets/f619c31f-4b67-420a-bed2-dab41a22ae3c)
+![Screenshot_1725617453](https://github.com/user-attachments/assets/d506b793-abaf-4372-861e-42c7b09248e5)
+![Screenshot_1725617479](https://github.com/user-attachments/assets/57763b28-0fb5-49de-9871-e0bda8c52cce)
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
