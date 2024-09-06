@@ -13,6 +13,14 @@ export default function Layout() {
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="home" options={{ headerShown: false }} />
           <Stack.Screen
+            name="transfers/components/successTransfer"
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="transfers/components/errorTransfer"
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="transfers/transfers"
             options={{
               title: "Transferencia Bancaria",
