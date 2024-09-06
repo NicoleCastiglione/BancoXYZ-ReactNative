@@ -92,7 +92,8 @@ const styles = StyleSheet.create({
   search: {
     height: 40,
     borderColor: "#ccc",
-    borderWidth: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
     marginBottom: 20,
     paddingHorizontal: 10,
     fontSize: 16,

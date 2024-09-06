@@ -11,7 +11,7 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useRouter } from "expo-router";
 
-export default function TransfersScreen() {
+export default function ScheduledTransferScreen() {
   const [scheduledAmount, setScheduledAmount] = useState("");
   const [scheduledRecipient, setScheduledRecipient] = useState("");
   const [transferDate, setTransferDate] = useState(new Date());
@@ -21,10 +21,9 @@ export default function TransfersScreen() {
   const handleScheduledTransfer = () => {
     if (scheduledAmount && scheduledRecipient) {
       Alert.alert(
-        "Transfer Scheduled",
-        `Amount: $${scheduledAmount}\nRecipient: ${scheduledRecipient}\nScheduled Date: ${transferDate.toLocaleDateString()}`
+        "Transferencia programada",
+        `Monto: $${scheduledAmount}\nDestinatario: ${scheduledRecipient}\nDía: ${transferDate.toLocaleDateString()}`
       );
-      // Lógica para agendar la transferencia aquí
     } else {
       Alert.alert("Error", "Please fill out all fields");
     }
@@ -58,8 +57,8 @@ export default function TransfersScreen() {
           onChangeText={setScheduledRecipient}
         />
       </View>
-      <Pressable onPress={() => setShowDatePicker(true)}>
-        <Text style={styles.linkText}>Seleccionar Fecha</Text>
+      <Pressable style={styles.button2} onPress={() => setShowDatePicker(true)}>
+        <Text style={styles.buttonText}>Seleccionar Fecha</Text>
       </Pressable>
       {showDatePicker && (
         <DateTimePicker
@@ -75,6 +74,9 @@ export default function TransfersScreen() {
       <Pressable style={styles.button} onPress={handleScheduledTransfer}>
         <Text style={styles.buttonText}>Agendar Transferencia</Text>
       </Pressable>
+      <Pressable style={styles.buttonHome} onPress={() => router.push("/home")}>
+        <Text style={styles.buttonText}>Volver al Home</Text>
+      </Pressable>
     </View>
   );
 }
@@ -85,12 +87,6 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#f0f4f8",
     justifyContent: "center",
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#3b3b3b",
-    marginBottom: 20,
   },
   amountContainer: {
     flexDirection: "row",
@@ -110,27 +106,44 @@ const styles = StyleSheet.create({
     color: "#000",
     paddingHorizontal: 8,
   },
+  dateButtonText: {
+    color: "#0666cc",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  datePicker: {
+    width: "100%",
+    marginVertical: 15,
+  },
+  selectedDate: {
+    marginTop: 10,
+    fontSize: 20,
+    textAlign: "center",
+    color: "#3b3b3b",
+  },
   button: {
     backgroundColor: "#0666cc",
     paddingVertical: 14,
     borderRadius: 12,
+    marginTop: "auto",
+  },
+  buttonHome: {
+    backgroundColor: "#3f7fc4",
+    paddingVertical: 14,
+    borderRadius: 12,
+    marginTop: 20,
+  },
+  button2: {
+    backgroundColor: "#5395db",
+    paddingVertical: 14,
+    borderRadius: 12,
     marginBottom: 20,
+    marginTop: 20,
   },
   buttonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
-  },
-  linkText: {
-    color: "#0666cc",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  selectedDate: {
-    marginTop: 10,
-    fontSize: 16,
-    textAlign: "center",
-    color: "#3b3b3b",
   },
 });
