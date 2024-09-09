@@ -43,7 +43,9 @@ export const LoginScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign In</Text>
+      <Text style={styles.title} testID="sign-in-text">
+        Sign In
+      </Text>
 
       {loading ? (
         <ActivityIndicator color={"blue"} size={"large"} />
@@ -76,7 +78,11 @@ export const LoginScreen: React.FC = () => {
             </Pressable>
           </View>
           {error && <Text style={{ color: "red" }}>{error}</Text>}
-          <Pressable style={styles.button} onPress={handleLogin}>
+          <Pressable
+            style={styles.button}
+            onPress={handleLogin}
+            testID="sign-in-button"
+          >
             <Text style={styles.buttonText}>Sign In</Text>
           </Pressable>
         </>
