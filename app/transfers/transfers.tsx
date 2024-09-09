@@ -45,7 +45,7 @@ export default function TransfersScreen() {
       }
     } catch (error) {
       console.log(error);
-      Alert.alert("Error", "An error occurred during the transfer");
+      Alert.alert("Error", "Ocurrió un error durante el proceso");
     } finally {
       setLoading(false);
     }

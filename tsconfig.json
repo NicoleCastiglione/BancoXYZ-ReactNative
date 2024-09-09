@@ -6,12 +6,21 @@
       "@/*": [
         "./*"
       ]
-    }
+    },
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "jest-config.ts", "jest-setup.ts", "mocks/@react-native-async-storage/async-storage.js"  ]
 }
+
+
+// {
+//   "compilerOptions": {
+//     "jsx": "react-native",
+//     "esModuleInterop": true,
+//     "types": ["jest"]
+//   }
+// }
