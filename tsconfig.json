@@ -1,3 +1,22 @@
+// {
+//   "extends": "expo/tsconfig.base",
+//   "compilerOptions": {
+//     "strict": true,
+//     "paths": {
+//       "@/*": [
+//         "./*"
+//       ]
+//     },
+//   },
+//   "include": [
+//     "**/*.ts",
+//     "**/*.tsx",
+//     ".expo/types/**/*.ts",
+//     "expo-env.d.ts"
+// , "jest.config.ts", "jest.setup.ts", "mocks/@react-native-async-storage/async-storage.js"  ]
+// }
+
+
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
@@ -7,15 +26,20 @@
         "./*"
       ]
     },
+    "esModuleInterop": true, // Asegura compatibilidad con módulos CommonJS
+    "skipLibCheck": true, // Opcional: Puede ayudar a evitar errores en bibliotecas
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-, "jest-config.ts", "jest-setup.ts", "mocks/@react-native-async-storage/async-storage.js"  ]
+    "expo-env.d.ts",
+    "jest.config.ts", // Incluido si necesitas que Jest lo procese
+    "jest.setup.ts", // Incluido si necesitas que Jest lo procese
+    "mocks/@react-native-async-storage/async-storage.js" // Incluye todos los archivos en mocks
+  ]
 }
-
 
 // {
 //   "compilerOptions": {
