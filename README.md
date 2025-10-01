@@ -1,5 +1,7 @@
 # Banco XYZ 
 
+Prueba técnica para cambio de célula dentro de Banco Macro.
+
 Aplicación móvil desarrollada en Expo de React Native. 
 
 ## Instalación
